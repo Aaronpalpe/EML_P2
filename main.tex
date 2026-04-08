@@ -1,0 +1,97 @@
+\documentclass[a4paper,12pt]{article}
+
+\makeatletter
+\providecommand\IfPDFManagementActiveF[2]{#2}
+\makeatother
+
+\usepackage{caption}
+\captionsetup{font=footnotesize}
+\usepackage[left=2.54cm, right=2.54cm, top=2.54cm, bottom=2.54cm]{geometry}
+\usepackage[utf8]{inputenc} % para escribir full spanish
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsfonts}
+\usepackage{lipsum}
+\usepackage{minted}
+\usepackage{csquotes}
+\usepackage{makecell}
+\usepackage{courier} 
+\usepackage[usenames]{color} % todo esto es para los textos y las cosas de colores
+\usepackage{tcolorbox}
+\usepackage{color}
+\usepackage{indentfirst}
+\usepackage{xcolor}
+\usepackage{svg} % para las imagenes vectorizadas
+\definecolor{azul}{rgb}{0.17, 0.40, 0.71} % no me quiero aprender los numeritos 
+\usepackage{listings}
+\usepackage{amssymb} % para escribir cosas matemáticas 
+\usepackage{amsmath} % para escribir más cosas matemáticas
+\usepackage[english]{babel} % un rollo de traducciones de comandos al spanish
+\renewcommand{\thesection}{\arabic{section}}
+\usepackage{fancyhdr}
+\usepackage{subfiles}
+\usepackage{csquotes}
+\usepackage{adjustbox}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+% \usepackage[backend=biber, style=verbose-trad2]{biblatex} % O el estilo que necesites (ej. 'authoryear-comp')
+% \addbibresource{bibliografia.bib} % Sustituye por el nombre de tu archivo .bib
+
+% Configuración de hyperref
+\hypersetup{
+    colorlinks=true,       % Activa el coloreado de los enlaces (quita los recuadros)
+    urlcolor=blue,         % Color para URLs externas (\href)
+    linkcolor=blue,        % Color para enlaces internos (como índices y referencias)
+    citecolor=blue         % Color para citas bibliográficas
+}
+\lstdefinestyle{Python}{
+  language=Python,
+  basicstyle=\ttfamily\footnotesize, % letra más pequeña
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{red},
+  backgroundcolor=\color{gray!10}, % fondo gris claro
+  showstringspaces=false,
+  breaklines=true,
+  frame=none, % sin marco
+  captionpos=b
+}
+\lstset{style=Python}
+
+% Pie de página
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+
+% Encabezado
+\renewcommand{\headrulewidth}{0pt} % Definir el grosor de la línea a cero
+
+% Para que no haya palabras entre márgenes
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+
+\usepackage{csquotes}
+\usepackage{adjustbox}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parindent}{0cm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+% \usepackage{subcaption}
+\renewenvironment{quote}
+  {\vspace{-\topsep}\list{}{\rightmargin=0cm \leftmargin=1cm}%
+   \item\relax}
+  {\endlist\vspace{-\topsep}}
+
+\setlength{\parindent}{20pt}
+
+\begin{document}
+\sloppy
+\include{portada/portada.tex}
+\include{index.tex}
+\include{chapters/session_1.tex}
+\include{chapters/session_2.tex}
+\include{chapters/session_3.tex}
+
+% \newpage
+% \bibliographystyle{plainurl}
+% \bibliography{bibliografia}
+\end{document}
