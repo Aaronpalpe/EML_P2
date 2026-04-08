@@ -1,53 +1,63 @@
 \section{Sesión 1}
+%FL AND NEBULA
 Para esta sesión, junto con la instalación de Nébula, se han realizado los 
-siguientes experimentos sobre el entrenamiento de una CNN en el dataset CIFAR-10 
-de clasificación de imágenes:
+siguientes cuatro experimentos sobre el entrenamiento de una CNN en el dataset CIFAR-10 
+de clasificación de imágenes. Se han realizado 10 rondas de entrenamiento en una única época, se han desplegado 4 nodos y las 
+actualizaciones se han calculado usando FedAvg. Los experimentos realizados han sido:
 
 \begin{itemize}
     \item Entrenamiento centralizado con datos homogéneos (IID) y heterogéneos (non-IID) entre los nodos.
     \item Entrenamiento descentralizado con datos homogéneos (IID) y heterogéneos (non-IID) entre los nodos.
 \end{itemize}
 
-En los cuatro experimentos, se han realizado 10 rondas de entrenamiento en una única época. Se han desplegado 4 nodos y las 
-actualizaciones se han calculado usando FedAvg.
-
-
 \subsection{FL centralizado}
-Comparamos el entrenamiento con datos homogénenos (IID) y heterogéneos (non-IID) entre los nodos. En el caso
+Comparamos el entrenamiento IID y non-IID entre los nodos. En el caso
 non-IID, se utiliza una distribución de dirichlet con $\alpha = 0.1$. Se puede ver la comparación de ambos casos en la figura \ref{fig:centralized}:
+\vspace{3mm}
+
+\noindent
 \begin{minipage}{\textwidth}
     \centering
     \begin{tabular}{cc}
         \textbf{IID} & \textbf{non-IID} \\
-        \includegraphics[width=0.4\textwidth]{images/iid_cfl_f1.png} &
+        \includegraphics[width=0.35\textwidth]{images/iid_cfl_f1.png} &
         \includegraphics[width=0.4\textwidth]{images/non_iid_cfl_f1.png} \\
     \end{tabular}
     \captionof{figure}{Comparación del entrenamiento centralizado con datos IID y non-IID.}
     \label{fig:centralized}
 \end{minipage}
+\vspace{3mm}
 
 Vemos que en el caso de datos homogéneos, el modelo converge más rápidamente y alcanza una mayor precisión, llegando en la ronda 10 a un F1-score de aproximadamente 0.65,
-mientras que en non-IID solo alcanza un F1-score de 0.47. Igualmente, en la ronda 3 IID ya alcanza un F1-score de 0.52, mientras que non-IID solo llega a 0.3. 
+mientras que en non-IID solo alcanza un F1-score de 0.47. Esto tiene sentido, ya que en el caso non-IID, cada nodo tiene una distribución de datos diferente, lo que dificulta la generalización del modelo global.
+Igualmente, en la ronda 3 IID ya alcanza un F1-score de 0.52, mientras que non-IID solo llega a 0.3. 
 
 
 
 \subsection{FL descentralizado}
 En este caso, se ha realizado el mismo experimento pero con un entrenamiento descentralizado. Se muestran los resultados en la figura \ref{fig:decentralized}:
+\vspace{3mm}
+
+\noindent
 \begin{minipage}{\textwidth}
     \centering
-    \begin{tabular}{c|c}
+    \begin{tabular}{cc}
         \textbf{IID} & \textbf{non-IID} \\
-        \hline
         \includegraphics[width=0.4\textwidth]{images/iid_dfl_f1.png} &
         \includegraphics[width=0.4\textwidth]{images/non_iid_dfl_f1.png} \\
     \end{tabular}
     \captionof{figure}{Comparación del entrenamiento descentralizado con datos IID y non-IID.}
     \label{fig:decentralized}
 \end{minipage}
+\vspace{3mm}
 
-Los resultados son muy similares a los obtenidos en el caso centralizado:
+% Los resultados son muy similares a los obtenidos en el caso centralizado:
 \begin{itemize}
     \item Ronda 3: IID alcanza un F1-score de 0.5, mientras que non-IID solo llega a 0.3.
     \item Ronda 10: IID alcanza un F1-score de aproximadamente 0.67, mientras que non-IID solo alcanza un F1-score de 0.5.
 \end{itemize}
 
+En general, aunque CFL y DFL muestran resultados similares en términos de rendimiento (F1-score), presentan diferencias importantes a nivel de arquitectura. CFL destaca por su simplicidad y menor sobrecarga de red y recursos, pero introduce un punto único de fallo y posibles cuellos de botella en federaciones grandes. Por otro lado, DFL ofrece mayor resiliencia frente a fallos y ataques, a costa de una mayor complejidad en la gestión de modelos, sincronización para la agregación y comunicaciones entre nodos.
+
+\vspace{3mm}
+AÑADIR MATRICES
