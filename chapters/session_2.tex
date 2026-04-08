@@ -1,0 +1,9 @@
+\section{Sesión 2}
+Para esta sesión, se ha utilizado de nuevo la configuracion de entrenamiento de DFL non-IID de la sesión anterior. Se han realizado con ella los siguientes experimentos:
+\begin{itemize}
+    \item Ataque de \textit{model poisoning} con 10\% de ruido gaussiano.
+    \item Ataque de \textit{label flipping} con 80\% de muestras envenenadas.
+\end{itemize}
+Para cada uno de los ataques, compararemos con un 20\% y un 50\% de clientes maliciosos. 
+\subsection{Model poisoning}
+En este ataque, los clientes maliciosos añaden ruido gaussiano a sus modelos locales antes de enviarlos al servidor.

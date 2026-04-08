@@ -1,13 +1,53 @@
-\chapter{Sesión 1}
-Para esta sesión, junto con la instalación de Nebula, se han realizado los 
-siguientes experimentos con el entrenamiento de una CNN en el dataset CIFAR-10 
+\section{Sesión 1}
+Para esta sesión, junto con la instalación de Nébula, se han realizado los 
+siguientes experimentos sobre el entrenamiento de una CNN en el dataset CIFAR-10 
 de clasificación de imágenes:
+
 \begin{itemize}
-    \item Entrenamiento usando FL centralizado con 
-    \item Entrenamiento usando FL descentralizado
+    \item Entrenamiento centralizado con datos homogéneos (IID) y heterogéneos (non-IID) entre los nodos.
+    \item Entrenamiento descentralizado con datos homogéneos (IID) y heterogéneos (non-IID) entre los nodos.
 \end{itemize}
-En los cuatro experimentos, se han realizado 10 rondas de entrenamiento en una única época. Se han desplegado 4 nodos y las actualizaciones se han calculado con FedAvg.
+
+En los cuatro experimentos, se han realizado 10 rondas de entrenamiento en una única época. Se han desplegado 4 nodos y las 
+actualizaciones se han calculado usando FedAvg.
 
 
-\section{FL centralizado}
-Comparamos 
+\subsection{FL centralizado}
+Comparamos el entrenamiento con datos homogénenos (IID) y heterogéneos (non-IID) entre los nodos. En el caso
+non-IID, se utiliza una distribución de dirichlet con $\alpha = 0.1$. Se puede ver la comparación de ambos casos en la figura \ref{fig:centralized}:
+\begin{minipage}{\textwidth}
+    \centering
+    \begin{tabular}{cc}
+        \textbf{IID} & \textbf{non-IID} \\
+        \includegraphics[width=0.4\textwidth]{images/iid_cfl_f1.png} &
+        \includegraphics[width=0.4\textwidth]{images/non_iid_cfl_f1.png} \\
+    \end{tabular}
+    \captionof{figure}{Comparación del entrenamiento centralizado con datos IID y non-IID.}
+    \label{fig:centralized}
+\end{minipage}
+
+Vemos que en el caso de datos homogéneos, el modelo converge más rápidamente y alcanza una mayor precisión, llegando en la ronda 10 a un F1-score de aproximadamente 0.65,
+mientras que en non-IID solo alcanza un F1-score de 0.47. Igualmente, en la ronda 3 IID ya alcanza un F1-score de 0.52, mientras que non-IID solo llega a 0.3. 
+
+
+
+\subsection{FL descentralizado}
+En este caso, se ha realizado el mismo experimento pero con un entrenamiento descentralizado. Se muestran los resultados en la figura \ref{fig:decentralized}:
+\begin{minipage}{\textwidth}
+    \centering
+    \begin{tabular}{c|c}
+        \textbf{IID} & \textbf{non-IID} \\
+        \hline
+        \includegraphics[width=0.4\textwidth]{images/iid_dfl_f1.png} &
+        \includegraphics[width=0.4\textwidth]{images/non_iid_dfl_f1.png} \\
+    \end{tabular}
+    \captionof{figure}{Comparación del entrenamiento descentralizado con datos IID y non-IID.}
+    \label{fig:decentralized}
+\end{minipage}
+
+Los resultados son muy similares a los obtenidos en el caso centralizado:
+\begin{itemize}
+    \item Ronda 3: IID alcanza un F1-score de 0.5, mientras que non-IID solo llega a 0.3.
+    \item Ronda 10: IID alcanza un F1-score de aproximadamente 0.67, mientras que non-IID solo alcanza un F1-score de 0.5.
+\end{itemize}
+
