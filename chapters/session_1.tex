@@ -12,8 +12,8 @@ actualizaciones se han calculado usando FedAvg. Los experimentos realizados han 
 
 \subsection{FL centralizado}
 Comparamos el entrenamiento IID y non-IID entre los nodos. En el caso
-non-IID, se utiliza una distribución de dirichlet con $\alpha = 0.1$. Se puede ver la comparación de ambos casos en la figura \ref{fig:centralized}:
-\vspace{3mm}
+non-IID, se utiliza una distribución de dirichlet con $\alpha = 0.1$. Se puede ver la comparación de ambos casos en la Figura \ref{fig:centralized}:
+\vspace{1mm}
 
 \noindent
 \begin{minipage}{\textwidth}
@@ -26,7 +26,7 @@ non-IID, se utiliza una distribución de dirichlet con $\alpha = 0.1$. Se puede 
     \captionof{figure}{Comparación del entrenamiento centralizado con datos IID y non-IID.}
     \label{fig:centralized}
 \end{minipage}
-\vspace{3mm}
+\vspace{1mm}
 
 Vemos que en el caso de datos homogéneos, el modelo converge más rápidamente y alcanza una mayor precisión, llegando en la ronda 10 a un F1-score de aproximadamente 0.65,
 mientras que en non-IID solo alcanza un F1-score de 0.47. Esto tiene sentido, ya que en el caso non-IID, cada nodo tiene una distribución de datos diferente, lo que dificulta la generalización del modelo global.
@@ -35,8 +35,8 @@ Igualmente, en la ronda 3 IID ya alcanza un F1-score de 0.52, mientras que non-I
 
 
 \subsection{FL descentralizado}
-En este caso, se ha realizado el mismo experimento pero con un entrenamiento descentralizado. Se muestran los resultados en la figura \ref{fig:decentralized}:
-\vspace{3mm}
+En este caso, se ha realizado el mismo experimento pero con un entrenamiento descentralizado. Se muestran los resultados en la Figura \ref{fig:decentralized}:
+\vspace{1mm}
 
 \noindent
 \begin{minipage}{\textwidth}
@@ -49,7 +49,7 @@ En este caso, se ha realizado el mismo experimento pero con un entrenamiento des
     \captionof{figure}{Comparación del entrenamiento descentralizado con datos IID y non-IID.}
     \label{fig:decentralized}
 \end{minipage}
-\vspace{3mm}
+\vspace{1mm}
 
 % Los resultados son muy similares a los obtenidos en el caso centralizado:
 \begin{itemize}
@@ -59,5 +59,5 @@ En este caso, se ha realizado el mismo experimento pero con un entrenamiento des
 
 En general, aunque CFL y DFL muestran resultados similares en términos de rendimiento (F1-score), presentan diferencias importantes a nivel de arquitectura. CFL destaca por su simplicidad y menor sobrecarga de red y recursos, pero introduce un punto único de fallo y posibles cuellos de botella en federaciones grandes. Por otro lado, DFL ofrece mayor resiliencia frente a fallos y ataques, a costa de una mayor complejidad en la gestión de modelos, sincronización para la agregación y comunicaciones entre nodos.
 
-\vspace{3mm}
+\vspace{1mm}
 AÑADIR MATRICES

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.17)  8 APR 2026 18:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.17)  12 APR 2026 10:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -897,12 +897,12 @@ Package hyperref Info: Link coloring ON on input line 86.
 LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
 (Font)              using `OT1/cmr/bx/n' instead on input line 5.
 
-<portada/Escudo-UM-2023-sello (1).jpg, id=30, 192.72pt x 192.72pt>
+<portada/Escudo-UM-2023-sello (1).jpg, id=38, 192.72pt x 192.72pt>
 File: portada/Escudo-UM-2023-sello (1).jpg Graphic file (type jpg)
 <use portada/Escudo-UM-2023-sello (1).jpg>
 Package pdftex.def Info: portada/Escudo-UM-2023-sello (1).jpg  used on input line 29.
 (pdftex.def)             Requested size: 144.94818pt x 144.94838pt.
-<portada/escudoFIUM.png, id=31, 1027.84pt x 1027.84pt>
+<portada/escudoFIUM.png, id=39, 1027.84pt x 1027.84pt>
 File: portada/escudoFIUM.png Graphic file (type png)
 <use portada/escudoFIUM.png>
 Package pdftex.def Info: portada/escudoFIUM.png  used on input line 34.
@@ -942,12 +942,12 @@ Underfull \hbox (badness 1997) in paragraph at lines 10--11
 []\OT1/cmr/m/n/12 Entrenamiento de-scen-tral-izado con datos ho-mog^^Seneos (IID) y het-erog^^Seneos
  []
 
-<images/iid_cfl_f1.png, id=52, 435.12563pt x 356.0803pt>
+<images/iid_cfl_f1.png, id=62, 435.12563pt x 356.0803pt>
 File: images/iid_cfl_f1.png Graphic file (type png)
 <use images/iid_cfl_f1.png>
 Package pdftex.def Info: images/iid_cfl_f1.png  used on input line 23.
 (pdftex.def)             Requested size: 158.54164pt x 129.74274pt.
-<images/non_iid_cfl_f1.png, id=54, 505.89pt x 353.82187pt>
+<images/non_iid_cfl_f1.png, id=64, 505.89pt x 353.82187pt>
 File: images/non_iid_cfl_f1.png Graphic file (type png)
 <use images/non_iid_cfl_f1.png>
 Package pdftex.def Info: images/non_iid_cfl_f1.png  used on input line 24.
@@ -957,12 +957,12 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 26.
 See the caption package documentation for explanation.
 
-<images/iid_dfl_f1.png, id=56, 432.11438pt x 350.81062pt>
+<images/iid_dfl_f1.png, id=66, 432.11438pt x 350.81062pt>
 File: images/iid_dfl_f1.png Graphic file (type png)
 <use images/iid_dfl_f1.png>
 Package pdftex.def Info: images/iid_dfl_f1.png  used on input line 46.
 (pdftex.def)             Requested size: 181.18454pt x 147.09322pt.
-<images/non_iid_dfl_f1.png, id=57, 427.5975pt x 349.305pt>
+<images/non_iid_dfl_f1.png, id=67, 427.5975pt x 349.305pt>
 File: images/non_iid_dfl_f1.png Graphic file (type png)
 <use images/non_iid_dfl_f1.png>
 Package pdftex.def Info: images/non_iid_dfl_f1.png  used on input line 47.
@@ -979,19 +979,51 @@ See the caption package documentation for explanation.
  <./images/iid_cfl_f1.png> <./images/non_iid_cfl_f1.png>]) [3 <./images/iid_dfl_f1.png> <./images/non_iid_dfl_f1.png>]
 \openout2 = `chapters/session_2.aux'.
 
- (chapters/session_2.tex) [4
+ (chapters/session_2.tex
+<images/model_poisoning_20.png, id=86, 429.10312pt x 351.56343pt>
+File: images/model_poisoning_20.png Graphic file (type png)
+<use images/model_poisoning_20.png>
+Package pdftex.def Info: images/model_poisoning_20.png  used on input line 24.
+(pdftex.def)             Requested size: 181.18454pt x 148.4442pt.
+<images/model_poisoning_50.png, id=87, 429.10312pt x 354.57469pt>
+File: images/model_poisoning_50.png Graphic file (type png)
+<use images/model_poisoning_50.png>
+Package pdftex.def Info: images/model_poisoning_50.png  used on input line 25.
+(pdftex.def)             Requested size: 181.18454pt x 149.71567pt.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 27.
+See the caption package documentation for explanation.
+
+<images/label_flipping_20.png, id=89, 433.62pt x 357.58594pt>
+File: images/label_flipping_20.png Graphic file (type png)
+<use images/label_flipping_20.png>
+Package pdftex.def Info: images/label_flipping_20.png  used on input line 54.
+(pdftex.def)             Requested size: 181.18454pt x 149.41573pt.
+<images/label_flipping_50.png, id=90, 429.85594pt x 353.82187pt>
+File: images/label_flipping_50.png Graphic file (type png)
+<use images/label_flipping_50.png>
+Package pdftex.def Info: images/label_flipping_50.png  used on input line 55.
+(pdftex.def)             Requested size: 181.18454pt x 149.13866pt.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 57.
+See the caption package documentation for explanation.
+
+[4
 
 
 
-]
+ <./images/model_poisoning_20.png> <./images/model_poisoning_50.png>]) [5 <./images/label_flipping_20.png> <./images/label_flipping_50.png>]
 \openout2 = `chapters/session_3.aux'.
 
- (chapters/session_3.tex) [5
+ (chapters/session_3.tex) [6
 
 
 
 ]
-runsystem(latexminted cleantemp  --timestamp 20260408184419 FAD58DE7366495DB4650CFEFAC2FCD61)...disabled (restricted).
+runsystem(latexminted cleantemp  --timestamp 20260412102221 FAD58DE7366495DB4650CFEFAC2FCD61)...disabled (restricted).
 
  (main.aux (portada/portada.aux) (index.aux) (chapters/session_1.aux) (chapters/session_2.aux) (chapters/session_3.aux))
  ***********
@@ -1003,20 +1035,20 @@ L3 programming layer <2025-11-06>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: DD9937028F18E30B57A821126A5C0EC5;687.
+(rerunfilecheck)             Checksum: 85D8C650B7391C53C114A404E4E622DE;996.
  ) 
 Here is how much of TeX's memory you used:
- 34740 strings out of 467871
- 703172 string characters out of 5418375
- 1491285 words of memory out of 5000000
- 63012 multiletter control sequences out of 15000+600000
- 635475 words of font info for 68 fonts, out of 8000000 for 9000
+ 34780 strings out of 467871
+ 704315 string characters out of 5418375
+ 1492285 words of memory out of 5000000
+ 63046 multiletter control sequences out of 15000+600000
+ 635821 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 96i,12n,118p,675b,668s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\aaron\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/aaron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/aaron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/aaron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/aaron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/aaron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/aaron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on main.pdf (6 pages, 1357130 bytes).
+ 96i,12n,118p,929b,571s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\aaron\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/aaron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/aaron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/aaron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/aaron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/aaron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/aaron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/aaron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/aaron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on main.pdf (7 pages, 1533801 bytes).
 PDF statistics:
- 119 PDF objects out of 1000 (max. 8388607)
- 16 named destinations out of 1000 (max. 500000)
- 91 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 158 PDF objects out of 1000 (max. 8388607)
+ 21 named destinations out of 1000 (max. 500000)
+ 127 words of extra memory for PDF output out of 10000 (max. 10000000)
 
