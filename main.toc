@@ -9,3 +9,6 @@
 \contentsline {subsection}{\numberline {2.2}Label flipping}{4}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Comparación y análisis}{5}{subsection.2.3}%
 \contentsline {section}{\numberline {3}Sesión 3}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Trimmed Mean}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Krum}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Comparación y análisis}{7}{subsection.3.3}%
