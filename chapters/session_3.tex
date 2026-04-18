@@ -8,37 +8,36 @@ Para esta sesión, se ha utilizado de nuevo la configuración de entrenamiento D
     \item Agregación mediante \textit{Krum}.
 \end{itemize}
 
-\subsection{Trimmed Mean}
+\subsection{Trimmed Mean}  
 
 El algoritmo \textit{Trimmed Mean} consiste en eliminar un porcentaje de los valores más extremos (potencialmente maliciosos) antes de realizar la agregación de los modelos, reduciendo así la influencia de outliers.
-
-\vspace{1mm}
-
-Los resultados se muestran en la Figura \ref{fig:trimmed_mean}:
+En \textit{Nebula}, hay que configurar el parámetro \texttt{beta} para indicar qué cantidad de valores extremos se desea eliminar. 
+Por defecto, este valor es 0, lo que implicaba que se estaba utilizando una media simple sin recorte. Tras cambiar este valor a 1, 
+los resultados muestran una mejora significativa, como se muestra en la Figura \ref{fig:trimmed_mean}.
 
 \vspace{1mm}
 \noindent
 \begin{minipage}{\textwidth}
     \centering
-    \includegraphics[width=0.5\textwidth]{images/trimmed_mean.png}
+    \includegraphics[width=0.5\textwidth]{images/trimmed_mean_f1.png}
     \captionof{figure}{Resultados del entrenamiento con agregación \textit{Trimmed Mean}.}
     \label{fig:trimmed_mean}
 \end{minipage}
 \vspace{1mm}
 
-Se observa que este método consigue mitigar parcialmente el efecto del nodo malicioso:
+Se observa que este método consigue prácticamente en su totalidad el efecto del nodo malicioso:
 
 \begin{itemize}
-    \item El modelo converge de manera relativamente estable, evitando las oscilaciones bruscas observadas en \textit{model poisoning} sin defensa.
-    \item El F1-score final se sitúa en torno a 0.11--0.12, lo que supone una mejora significativa frente al caso atacado sin mecanismos de defensa.
-    \item Sin embargo, el rendimiento sigue siendo inferior al escenario sin ataques, indicando que el filtrado de valores extremos no elimina completamente el impacto adversario.
+    \item El modelo converge de manera estable, evitando las oscilaciones bruscas observadas en \textit{model poisoning} sin defensa.
+    \item El F1-score final se sitúa en torno a 0.47, lo que supone una mejora significativa frente al caso atacado sin mecanismos de defensa.
+    \item Sin embargo, el rendimiento sigue siendo ligeramente inferior al escenario sin ataques, indicando que el filtrado de valores extremos no elimina completamente el impacto adversario.
 \end{itemize}
 
 % Las matrices de confusión muestran una mejora global en la clasificación respecto al escenario atacado, aunque persisten errores distribuidos entre varias clases.
 
-Punto clave: TrimmedMean usa beta=0 por defecto en trimmedmean.py:15, y no vi que backend lo configure. Con beta=0, no recorta extremos y termina en media simple por componente en trimmedmean.py:37.
-Además, ese TrimmedMean no pondera por tamaño de dataset (solo promedia tensores), mientras FedAvg sí pondera por muestras en fedavg.py:23 y fedavg.py:33.
-Krum aquí selecciona un único modelo (el de menor suma de distancias) en krum.py:44 y krum.py:49; no pondera por muestras y puede tirar mucha información útil en non-IID.
+% Punto clave: TrimmedMean usa beta=0 por defecto en trimmedmean.py:15, y no vi que backend lo configure. Con beta=0, no recorta extremos y termina en media simple por componente en trimmedmean.py:37.
+% Además, ese TrimmedMean no pondera por tamaño de dataset (solo promedia tensores), mientras FedAvg sí pondera por muestras en fedavg.py:23 y fedavg.py:33.
+% Krum aquí selecciona un único modelo (el de menor suma de distancias) en krum.py:44 y krum.py:49; no pondera por muestras y puede tirar mucha información útil en non-IID.
 
 
 \subsection{Krum}
@@ -50,10 +49,10 @@ El algoritmo \textit{Krum} selecciona la actualización más representativa entr
 Los resultados se presentan en la Figura \ref{fig:krum}:
 
 \vspace{1mm}
-\noindent
+\noindent 
 \begin{minipage}{\textwidth}
     \centering
-    \includegraphics[width=0.5\textwidth]{images/krum.png}
+    \includegraphics[width=0.5\textwidth]{images/krum_bueno.png}
     \captionof{figure}{Resultados del entrenamiento con agregación \textit{Krum}.}
     \label{fig:krum}
 \end{minipage}
@@ -62,14 +61,37 @@ Los resultados se presentan en la Figura \ref{fig:krum}:
 En este caso, el comportamiento es diferente:
 
 \begin{itemize}
-    \item El entrenamiento es más estable que en el caso sin defensa, pero presenta mayor variabilidad que \textit{Trimmed Mean}.
-    \item El F1-score final se sitúa aproximadamente entre 0.07 y 0.11 dependiendo del nodo, mostrando un rendimiento ligeramente inferior en promedio.
+    \item El entrenamiento mejora respecto al escenario sin defensa, pero no alcanza la estabilidad observada con \textit{Trimmed Mean}.
+    \item En un primer momento, parece que a los nodos benignos les cuesta distinguir al nodo malicioso, lo que provoca un comportamiento
+    aleatorio hasta la ronda 6, donde ya empieza a converger. 
+    \item El F1-score final se sitúa aproximadamente en 0.29, lejos de los valores obtenidos con \textit{Trimmed Mean}.
     \item Esto sugiere que, aunque Krum es capaz de descartar actualizaciones maliciosas, puede verse afectado por la heterogeneidad non-IID, seleccionando modelos que no representan adecuadamente la distribución global.
 \end{itemize}
 
+Vemos la matriz de confusión tanto del nodo malicioso como de uno de los nodos benignos en la 
+última ronda, en la Figura \ref{fig:krum_confusion}:
+\vspace{1mm} 
+\noindent
+\begin{minipage}{\textwidth}
+    \centering
+    \begin{tabular}{cc}
+        \textbf{Nodo malicioso} & \textbf{Nodo benigno} \\
+        \includegraphics[width=0.3\textwidth]{images/krum_cm_malicious.png} &
+        \includegraphics[width=0.3\textwidth]{images/krum_cm_honest.png} \\
+    \end{tabular}
+    \captionof{figure}{Matrices de confusión del nodo malicioso y uno de los nodos benignos en la última ronda con agregación Krum.}
+    \label{fig:krum_confusion}
+\end{minipage}
+\vspace{1mm}
+Vemos que el modelo del nodo malicoso predice únicamente las clases 2, 7 y 8. Esto hace que el nodo benigno se 
+vea arrastrado, haciendo que tanto la clase 2 como la clase 7 se vean sobrepredichas y sin embargo hay clases 
+como la 3, 4 y 5 que no tienen ningún verdadero positivo, porque se confunden tanto con la clase 2 como con la clase 7. 
+
+
+
 % Las matrices de confusión reflejan una mayor dispersión en los errores, indicando que el modelo puede estar sesgado hacia ciertas clases dependiendo del nodo seleccionado en cada ronda.
 
-\subsection{Comparación y análisis}
+\subsection{Comparación y análisis} 
 
 A partir de los resultados obtenidos, se pueden extraer las siguientes conclusiones:
 

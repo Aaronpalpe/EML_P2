@@ -21,19 +21,22 @@ Los resultados obtenidos se muestran en la Figura \ref{fig:model_poisoning}:
     \centering
     \begin{tabular}{cc}
         \textbf{20\% nodos maliciosos} & \textbf{50\% nodos maliciosos} \\
-        \includegraphics[width=0.4\textwidth]{images/model_poisoning_20.png} &
+        \includegraphics[width=0.35\textwidth]{images/model_poisoning_20_bueno.png} &
         \includegraphics[width=0.4\textwidth]{images/model_poisoning_50.png} \\
     \end{tabular}
     \captionof{figure}{Impacto del ataque de \textit{model poisoning} con diferentes porcentajes de nodos maliciosos.}
     \label{fig:model_poisoning}
 \end{minipage}
-\vspace{1mm}
+\vspace{1mm} 
 
 Se observa que el impacto del ataque aumenta significativamente con el número de nodos maliciosos, provocando una notable inestabilidad:
 
 \begin{itemize}
-    \item Con un 20\% de nodos maliciosos, la mayoría de los participantes logra converger hacia un F1-score aproximado de 0.41. Sin embargo, el nodo atacante queda rezagado con un valor de apenas 0.03 porque realiza el test después de introducir el ruido al modelo recibido por el agregador.
-    \item Con un 50\% de nodos maliciosos, la convergencia se ve gravemente afectada. La gráfica muestra fuertes oscilaciones y una degradación final, desplomando el F1-score a valores casi nulos de entre 0.02 y 0.09 en el último paso.
+    \item Con un 20\% de nodos maliciosos, en un primer momento el modelo parece converger, pero a partir de la ronda 
+    3, el rendimiento se desploma, alcanzando un F1-score final de apenas 0.08. 
+    \item Con un 50\% de nodos maliciosos, el comportamiento es similar, pero la caída es aún más pronunciada, 
+    pues los dos nodos benignos acaban con un F1-score cercano a 0, ya que al haber la mitad de nodos maliciosos ha sido 
+    imposible para los modelos aprender nada útil y se han visto arrastrados por el ruido introducido.
 \end{itemize}
 
 %Las matrices de confusión reflejan un aumento en los errores de clasificación generalizados, sin afectar a clases específicas de forma predominante, lo cual es consistente con la naturaleza no dirigida del ruido gaussiano.
@@ -73,10 +76,21 @@ En este escenario, el impacto reduce el rendimiento pero mantiene un entrenamien
 Comparando ambos ataques y configuraciones con los datos obtenidos, se extraen las siguientes conclusiones:
 
 \begin{itemize}
-    \item Contrario a lo que se podría intuir en un inicio, el ataque de \textit{model poisoning} de 10\% genera un escenario más inestable con dos nodos maliciosos que el de \textit{label flipping} al 80\%. Mientras el primero reduce la convergencia (F1-score $\leq 0.09$), el segundo logra engañar al modelo llevándolo a una convergencia falsa pero ligeramente superior (F1-score 0.16).
-    \item A medida que aumenta el porcentaje de clientes maliciosos (20\% $\rightarrow$ 50\%), la métrica final cae en ambos ataques (drásticamente en el primero): de 0.41 a 0.09 en \textit{model poisoning}, y de 0.17 a 0.16 en \textit{label flipping}.
+    \item Contrario a lo que se podría intuir en un inicio, el ataque de \textit{model poisoning} de 10\% genera 
+    un escenario más inestable con dos nodos maliciosos que el de \textit{label flipping} al 80\%. Mientras el 
+    primero reduce la convergencia (F1-score $\leq 0.08$), el segundo logra engañar al modelo llevándolo a una 
+    convergencia falsa pero ligeramente superior (F1-score 0.16).
+    \item A medida que aumenta el porcentaje de clientes maliciosos (20\% $\rightarrow$ 50\%), la métrica final 
+    cae en ambos ataques: de 0.07 a 0.02 en \textit{model poisoning}, y de 0.17 
+    a 0.16 en \textit{label flipping}.
     %\item En comparación con los resultados de la sesión 1, donde el caso non-IID ya presentaba dificultades de convergencia, los ataques agravan aún más este problema y resaltan la fragilidad de estas redes frente a actores bizantinos.
-    \item En la sesión anterior, el entorno DFL ideal (IID) alcanzaba un F1-score de 0.67, mientras que la simple introducción de heterogeneidad en los datos (DFL non-IID base) lo reducía a 0.50. Al introducir condiciones de ataque sobre este último escenario, la degradación se amplifica: en la condición de ataque más leve (20\% \textit{label flipping}), el F1-score ya cae por debajo del caso base a 0.48. En las condiciones de ataque más severas (50\% \textit{model poisoning}), el modelo se desploma hasta un 0.02. Esto evidencia que los entornos non-IID son frágiles ante actualizaciones maliciosas, ya que a la agregación le resulta mucho más difícil distinguir entre una variación legítima (datos sesgados) y un ataque intencionado.
+    \item En la sesión anterior, el entorno DFL ideal (IID) alcanzaba un F1-score de 0.67, mientras que la simple 
+    introducción de heterogeneidad en los datos (DFL non-IID base) lo reducía a 0.50. Al introducir condiciones 
+    de ataque sobre este último escenario, la degradación se amplifica: en la condición de ataque más 
+    leve (20\% \textit{label flipping}), el F1-score ya cae por debajo del caso base a 0.48. 
+    En las condiciones de ataque más severas (50\% \textit{model poisoning}), el modelo se desploma hasta un 0.02. 
+    Esto evidencia que los entornos non-IID son frágiles ante actualizaciones maliciosas, ya que a la agregación 
+    le resulta mucho más difícil distinguir entre una variación legítima (datos sesgados) y un ataque intencionado.
 
 \end{itemize}
 
@@ -88,5 +102,3 @@ Comparando ambos ataques y configuraciones con los datos obtenidos, se extraen l
 % \end{itemize}
 
 % En resumen, los ataques afectan tanto a la calidad final del modelo como a la dinámica de entrenamiento, siendo el entorno non-IID especialmente vulnerable debido a la ya existente heterogeneidad de los datos.
-
-Matriz de atacante
