@@ -67,18 +67,18 @@ Podemos ver las matrices de confusión para ambos casos en la Figura \ref{fig:co
 \begin{minipage}{\textwidth}
     \centering
     \begin{tabular}{cccc}
-        \textbf{DFL-Round 3} & \textbf{DFL-Round 10} & \textbf{CFL-Round 3} & \textbf{CFL-Round 10} \\
-        \includegraphics[width=0.23\textwidth]{images/non_iid_dfl3_cm.png} &
-        \includegraphics[width=0.23\textwidth]{images/non_iid_dfl_cm.png} &
+        \textbf{CFL-Round 3} & \textbf{CFL-Round 10} & \textbf{DFL-Round 3} & \textbf{DFL-Round 10} \\
         \includegraphics[width=0.23\textwidth]{images/non_iid_cfl3_cm.png} &
-        \includegraphics[width=0.23\textwidth]{images/non_iid_cfl_cm.png} \\
+        \includegraphics[width=0.23\textwidth]{images/non_iid_cfl_cm.png} &
+        \includegraphics[width=0.23\textwidth]{images/non_iid_dfl3_cm.png} &
+        \includegraphics[width=0.23\textwidth]{images/non_iid_dfl_cm.png} \\
     \end{tabular}
     \setlength{\abovecaptionskip}{0pt} % Ajustamos el espacio aquí (por ejemplo a 2pt)
-    \captionof{figure}{Matrices de confusión para el entrenamiento non-IID en DFL y CFL en las rondas 3 y 10.}
+    \captionof{figure}{Matrices de confusión para el entrenamiento non-IID en CFL y DFL en las rondas 3 y 10.}
     \label{fig:confusion_matrices}
 \end{minipage}
 \vspace{1mm}
 
-Vemos que ambas rondas 3 son muy parecidas, donde todavía la diagonal no está muy marcado, con
+Vemos que ambas rondas 3 son muy parecidas, donde todavía la diagonal no está muy marcada, con
 errores principalmente en las clases 0, 4 y 8. 
 En la ronda 10 sí que se aprecian menos errores, con una diagonal más marcada.

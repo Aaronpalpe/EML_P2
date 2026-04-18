@@ -66,7 +66,7 @@ En este escenario, el impacto reduce el rendimiento pero mantiene un entrenamien
 
 \begin{itemize}
     \item Con un 20\% de nodos maliciosos, el modelo presenta una convergencia similar para todos los clientes, pero el rendimiento se desploma, alcanzando un F1-score final en torno a 0.17.
-    \item Con un 50\% de nodos maliciosos, el modelo logra converger estancándose de manera uniforme en un F1-score de 0.15.
+    \item Con un 50\% de nodos maliciosos, el modelo logra converger estancándose de manera uniforme en un F1-score de 0.16.
 \end{itemize}
 
 %Las matrices de confusión muestran patrones de error más estructurados, con confusión sistemática entre clases, lo que indica que el modelo aprende relaciones incorrectas debido a las etiquetas alteradas.
@@ -78,18 +78,18 @@ Comparando ambos ataques y configuraciones con los datos obtenidos, se extraen l
 \begin{itemize}
     \item Contrario a lo que se podría intuir en un inicio, el ataque de \textit{model poisoning} de 10\% genera 
     un escenario más inestable con dos nodos maliciosos que el de \textit{label flipping} al 80\%. Mientras el 
-    primero reduce la convergencia (F1-score $\leq 0.08$), el segundo logra engañar al modelo llevándolo a una 
+    primero reduce la convergencia (F1-score $0.08$), el segundo logra engañar al modelo llevándolo a una 
     convergencia falsa pero ligeramente superior (F1-score 0.16).
-    \item A medida que aumenta el porcentaje de clientes maliciosos (20\% $\rightarrow$ 50\%), la métrica final 
+    \item A medida que aumenta el porcentaje de clientes maliciosos (20\% a 50\%), la métrica final 
     cae en ambos ataques: de 0.07 a 0.02 en \textit{model poisoning}, y de 0.17 
     a 0.16 en \textit{label flipping}.
     %\item En comparación con los resultados de la sesión 1, donde el caso non-IID ya presentaba dificultades de convergencia, los ataques agravan aún más este problema y resaltan la fragilidad de estas redes frente a actores bizantinos.
     \item En la sesión anterior, el entorno DFL ideal (IID) alcanzaba un F1-score de 0.67, mientras que la simple 
     introducción de heterogeneidad en los datos (DFL non-IID base) lo reducía a 0.50. Al introducir condiciones 
     de ataque sobre este último escenario, la degradación se amplifica: en la condición de ataque más 
-    leve (20\% \textit{label flipping}), el F1-score ya cae por debajo del caso base a 0.48. 
+    leve (20\% \textit{label flipping}), el F1-score ya cae por debajo del caso base a 0.17. 
     En las condiciones de ataque más severas (50\% \textit{model poisoning}), el modelo se desploma hasta un 0.02. 
-    Esto evidencia que los entornos non-IID son frágiles ante actualizaciones maliciosas, ya que a la agregación 
+    Esto evidencia que los entornos non-IID son sensibles ante actualizaciones maliciosas, ya que a la agregación 
     le resulta mucho más difícil distinguir entre una variación legítima (datos sesgados) y un ataque intencionado.
 
 \end{itemize}

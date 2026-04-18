@@ -25,11 +25,11 @@ los resultados muestran una mejora significativa, como se muestra en la Figura \
 \end{minipage}
 \vspace{1mm}
 
-Se observa que este método consigue prácticamente en su totalidad el efecto del nodo malicioso:
+Se observa que este método consigue anular prácticamente en su totalidad el efecto del nodo malicioso:
 
 \begin{itemize}
     \item El modelo converge de manera estable, evitando las oscilaciones bruscas observadas en \textit{model poisoning} sin defensa.
-    \item El F1-score final se sitúa en torno a 0.47, lo que supone una mejora significativa frente al caso atacado sin mecanismos de defensa.
+    \item El F1-score final se sitúa en torno a 0.47, lo que supone una mejora significativa frente al caso atacado sin mecanismos de defensa (0.08).
     \item Sin embargo, el rendimiento sigue siendo ligeramente inferior al escenario sin ataques, indicando que el filtrado de valores extremos no elimina completamente el impacto adversario.
 \end{itemize}
 
@@ -70,19 +70,21 @@ En este caso, el comportamiento es diferente:
 
 Vemos la matriz de confusión tanto del nodo malicioso como de uno de los nodos benignos en la 
 última ronda, en la Figura \ref{fig:krum_confusion}:
-\vspace{1mm} 
+\vspace{1mm}
+
 \noindent
 \begin{minipage}{\textwidth}
     \centering
     \begin{tabular}{cc}
         \textbf{Nodo malicioso} & \textbf{Nodo benigno} \\
-        \includegraphics[width=0.3\textwidth]{images/krum_cm_malicious.png} &
-        \includegraphics[width=0.3\textwidth]{images/krum_cm_honest.png} \\
+        \includegraphics[width=0.25\textwidth]{images/krum_cm_malicious.png} &
+        \includegraphics[width=0.25\textwidth]{images/krum_cm_honest.png} \\
     \end{tabular}
     \captionof{figure}{Matrices de confusión del nodo malicioso y uno de los nodos benignos en la última ronda con agregación Krum.}
     \label{fig:krum_confusion}
 \end{minipage}
 \vspace{1mm}
+
 Vemos que el modelo del nodo malicoso predice únicamente las clases 2, 7 y 8. Esto hace que el nodo benigno se 
 vea arrastrado, haciendo que tanto la clase 2 como la clase 7 se vean sobrepredichas y sin embargo hay clases 
 como la 3, 4 y 5 que no tienen ningún verdadero positivo, porque se confunden tanto con la clase 2 como con la clase 7. 
@@ -102,7 +104,7 @@ A partir de los resultados obtenidos, se pueden extraer las siguientes conclusio
     % \textbf{Impacto de non-IID:} 
     %\item Ninguno de los métodos elimina completamente el efecto del atacante. En \textit{Krum}, se observa un mayor sesgo hacia ciertas clases, lo que sugiere un posible sobreajuste local dependiendo del nodo seleccionado. En \textit{Trimmed Mean}, los errores son más uniformes, indicando un comportamiento más equilibrado.
     % \textbf{Rendimiento por clases:} 
-    \item  Ambos métodos mejoran claramente el rendimiento respecto al escenario atacado sin defensa (F1-score $\leq 0.09$), pero no alcanzan los niveles del escenario sin ataques. Esto confirma que, aunque las técnicas robustas ayudan, no eliminan completamente el efecto adversarial.
+    \item  Ambos métodos mejoran claramente el rendimiento respecto al escenario atacado sin defensa (F1-score $0.08$), pero no alcanzan los niveles del escenario sin ataques. Esto confirma que, aunque las técnicas robustas ayudan, no eliminan completamente el efecto adversarial.
     % \textbf{Comparación global:}
 \end{itemize}
 

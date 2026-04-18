@@ -25,7 +25,7 @@ realizando un \textit{flooding attack}. Sobre este escenario, se han usado dos c
 
 En ambos casos, la reputación inicial de cada nodo se ha establecido en 0.5. Los pesos hacen referencia a la importancia
 relativa de cada métrica usada. En nuestro caso, usaremos siempre las 4 métricas disponibles, que se dividen en dos categorías:
-\textbf{métricas basadas en el modelo}, que incluyen \textit{Similitud del modelo} y \textit{Fracción de parámetros cambiados}, y métricas basadas en la comunicación, que incluyen \textit{Número de mensajes} y \textit{Latencia de llegada del modelo}.
+\textbf{métricas basadas en el modelo}, que incluyen \textit{Similitud del modelo} y \textit{Fracción de parámetros cambiados}, y %y métricas basadas en la comunicación, que incluyen \textit{Número de mensajes} y \textit{Latencia de llegada del modelo}.
 \textbf{métricas basadas en la comunicación}, que incluyen \textit{Número de mensajes} y \textit{Latencia de llegada del modelo}.
 \vspace{1mm}
 
@@ -77,9 +77,10 @@ En cuanto a los resultados del entrenamiento con esta configuración, se muestra
     \label{fig:reputation_static_results}
 \end{figure}
 
-La gráfica de F1-score es errática, con el nodo malicioso alcanzando un rendimiento similar
-al de otro nodo honesto, mientras que otro nodo honesto tiene un rendimiento muy variable y
-otro nodo honesto tiene un rendimiento muy bajo. En cuanto a las matrices de confusión, la
+%REVISAR LA PRIMERA PARTE DE ESTE PÁRRAFO
+La gráfica del F1-score es errática: el nodo malicioso alcanza un rendimiento comparable al de un nodo honesto, 
+mientras que otro nodo honesto presenta una alta variabilidad, y otro tiene un rendimiento muy bajo.
+En cuanto a las matrices de confusión, la
 del nodo malicioso (derecha) muestra una mejor clasificación frente al nodo honesto (izquierda).
 Esto sugiere que el sistema de reputación con pesos estáticos no ha sido capaz de aislar al nodo malicioso.
 
@@ -140,7 +141,7 @@ Esto, sumado a que el nodo 0 cuenta con un dataset mucho más pequeño que el re
 A partir de los resultados obtenidos, se pueden extraer las siguientes conclusiones:
 
 \begin{itemize}
-    \item La reputación con \textit{pesos dinámicos} demuestra una mayor eficacia frente a ataques de \textit{flooding}, y cabe esperar que también sea superior a \textit{pesos estáticos} frente a otros tipos de ataques.
+    \item La reputación con \textit{pesos dinámicos} demuestra una mayor eficacia frente a ataques de \textit{flooding}, y cabe esperar que también sea superior a \textit{pesos estáticos} frente a otros tipos de ataques
      ya que consigue alcanzar un F1-score superior en promedio.
     \item Ambos métodos presentan limitaciones para aislar completamente al nodo malicioso, y al menos un nodo honesto se ve fuertemente afectado por el ataque en ambos escenarios.
     \item Curiosamente, el nodo malicioso ha estado en ambos escenarios entre los que mejores resultados encuentran. Esto se debe a que, a pesar de que en la agregación no se tienen en
