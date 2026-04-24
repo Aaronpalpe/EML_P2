@@ -44,7 +44,8 @@ reputación muy cercana a 1, mientras que la reputación del nodo malicioso es a
 inferior a 0.7. Esta diferencia coincide con la poderación de la métrica de número
 de mensajes (0.3), en la que el nodo malicioso obtiene una puntuación terrible (envía
 alrededor de 15 mensajes por ronda). Dado que el nodo malicioso obtiene una buena puntuación
-en las otras métricas, la reputación total no es tan baja como cabría esperar.
+en las otras métricas, su reputación total se mantiene por encima de 0.5 y el nodo malicioso
+se sigue considerando como honesto.
 
 En cuanto a los resultados del entrenamiento con esta configuración, se muestran en la Figura \ref{fig:reputation_static_results}:
 \vspace{1mm}
@@ -71,18 +72,20 @@ En cuanto a los resultados del entrenamiento con esta configuración, se muestra
 \end{figure}
 
 %REVISAR LA PRIMERA PARTE DE ESTE PÁRRAFO
-La gráfica del F1-score es errática: el nodo malicioso alcanza un rendimiento comparable al de un nodo honesto, 
-mientras que otro nodo honesto presenta una alta variabilidad, y otro tiene un rendimiento muy bajo.
-En cuanto a las matrices de confusión, la
-del nodo malicioso (derecha) muestra una mejor clasificación frente al nodo honesto (izquierda).
-Esto sugiere que el sistema de reputación con pesos estáticos no ha sido capaz de aislar al nodo malicioso.
+La gráfica del F1-score apenas muestra señales del ataque. Los modelos alcanzan un F1-score cercano a 0.46,
+mientras que el baseline (sin ataque) alcanza alrededor de 0.49. Esto es debido a que, a pesar del ataque 
+de flooding, el contenido de los mensajes del nodo malicioso es correcto. El ataque resulta en un aumento del tráfico,
+lo que si hace que el tiempo de entrenamiento esté cerca de duplicarse (4 minutos baseline vs 8 minutos con flooding y pesos estáticos).
+Parte de este overhead puede ser debido también a la gestión de la reputación.
+En cuanto a las matrices de confusión, las cuatro resultantes son prácticamente idénticas, lo que indica que los modelos han convergido.
+A la izquierda se muestra la matriz de confusión de un nodo honesto y a la derecha la del nodo malicioso.
 
 \subsection{Pesos dinámicos}
 
-En esta configuración, los pesos se ajustan dinámicamente para cada métrica en
-función de las condiciones del entorno.
+% En esta configuración, los pesos se ajustan dinámicamente para cada métrica en
+% función de las condiciones del entorno.
 
-\vspace{1mm}
+% \vspace{1mm}
 
 Los resultados se presentan en la Figura \ref{fig:reputation_dynamic}:
 
@@ -90,13 +93,17 @@ Los resultados se presentan en la Figura \ref{fig:reputation_dynamic}:
 \noindent
 \begin{minipage}{\textwidth}
     \centering
-    \includegraphics[width=0.9\textwidth]{images/reputation_dynamic.png}
+    \includegraphics[width=0.9\textwidth]{images/reputation_dynamic_rep.png}
     \captionof{figure}{Reputación con pesos dinámicos a lo largo del entrenamiento.}
     \label{fig:reputation_dynamic}
 \end{minipage}
 \vspace{1mm}
 
-En este caso, se observa que los nodos honestos asignan una reputación mucho más baja al nodo malicioso y de manera más rápida.
+En este caso, se observa que los nodos honestos asignan una reputación mucho más baja al nodo malicioso.
+Esta vez la reputación del nodo malicioso cae hasta aproximadamente 0.3. Este valor, al quedar por debajo de 0.5, causa
+la exclusión de las actualizaciones del nodo malicioso en el proceso de agregación. Sin embargo, parece que sí se le
+siguen enviando las actualizaciones del modelo global, lo que permite que el nodo malicioso siga aprendiendo y mejorando
+su rendimiento.
 Los resultados del entrenamiento con esta configuración se muestran en la Figura \ref{fig:reputation_dynamic_results}:
 
 \vspace{1mm}
@@ -109,38 +116,35 @@ Los resultados del entrenamiento con esta configuración se muestran en la Figur
     \hfill
     % Segunda imagen: cm
     \begin{minipage}{0.25\textwidth}
-        \includegraphics[width=\textwidth]{images/reputation_dynamic_cm2.png}
+        \includegraphics[width=\textwidth]{images/reputation_dynamic_honest_cm.png}
     \end{minipage}
     \hfill
     % Tercera imagen: cm2
     \begin{minipage}{0.25\textwidth}
-        \includegraphics[width=\textwidth]{images/reputation_dynamic_cm.png}
+        \includegraphics[width=\textwidth]{images/reputation_dynamic_malicious_cm.png}
     \end{minipage}
     
-    \caption{Resultados del entrenamiento con pesos dinámicos: F1-score y matrices de confusión. Matriz de confusión del nodo distinto (no malicioso) a la derecha.}
+    \caption{Resultados del entrenamiento con pesos dinámicos: F1-score y matrices de confusión. Matriz de confusión del nodo malicioso a la derecha.}
     \label{fig:reputation_dynamic_results}
 \end{figure}
 
-La gráfica de F1-score es ahora más estable, pero muestra un resultado curioso. Tres nodos alcanzan un F1-score
-similar, cercano a 0.35, mientras que el nodo restante (que no es el malicioso) tiene un rendimiento muy inferior.
-En cuanto a las matrices de confusión, la de la izquierda es una de los tres nodos con buen rendimiento (que tienen
-matrices de confusión casi idénticas), mientras que la de la derecha corresponde al nodo con peor rendimiento.
-Para interpretar estos resultados, observamos que al inicio del entrenamiento, el nodo 0 (que es el que obtiene peor rendimiento)
-comienza creyendo que hay dos nodos maliciosos en la federación, lo que causa que descarte las actualizaciones de un nodo honesto.
-Esto, sumado a que el nodo 0 cuenta con un dataset mucho más pequeño que el resto, hace que obtenga un modelo global bastante inferior.
+La gráfica de F1-score es también similar a la anterior. Resulta curioso que el nodo malicioso obtenga un rendimiento
+incluso mejor que el resto, lo que se debe a que es el único que sigue utilizando sus datos para entrenar (al tener
+baja reputación, los otros nodos descartan sus actualizaciones) lo que, irónicamente, aporta cierta ventaja al nodo malicioso. El tiempo de
+entrenamiento es muy similar al de la configuración de pesos estáticos. Esto puede ser debido a que el nodo malicioso
+sigue enviando y recibiendo mensajes, aunque estos sean ignorados posteriormente.
+En cuanto a las matrices de confusión, la de la izquierda es de un nodo honesto, mientras que la de la derecha corresponde
+al nodo malicioso. De nuevo, los modelos convergen y las cuatro matrices de confusión son prácticamente idénticas.
 
 \subsection{Comparación y análisis}
 
 A partir de los resultados obtenidos, se pueden extraer las siguientes conclusiones:
 
 \begin{itemize}
-    \item La reputación con \textit{pesos dinámicos} demuestra una mayor eficacia frente a ataques de \textit{flooding}, y cabe esperar que también sea superior a \textit{pesos estáticos} frente a otros tipos de ataques
-     ya que consigue alcanzar un F1-score superior en promedio.
-    \item Ambos métodos presentan limitaciones para aislar completamente al nodo malicioso, y al menos un nodo honesto se ve fuertemente afectado por el ataque en ambos escenarios.
-    \item Curiosamente, el nodo malicioso ha estado en ambos escenarios entre los que mejores resultados encuentran. Esto se debe a que, a pesar de que en la agregación no se tienen en
-    cuenta las actualizaciones de modelos con poca reputación, sí que se les sigue enviando el modelo global actualizado. Esto permite que el nodo malicioso siga aprendiendo y mejorando
-    su rendimiento. Además, el nodo malicioso es el único que utiliza sus datos propios para entrenar, lo que le aporta cierta ventaja adicional.
-
+    \item La reputación con \textit{pesos dinámicos} demuestra una mayor capacidad de detección de ataques de \textit{flooding}, y cabe esperar que también sea superior a \textit{pesos estáticos} frente a otros tipos de ataques.
+    \item Solo en el escenario con pesos dinámicos, el nodo malicioso es detectado y excluido completamente. Esta exclusión ocurre ya en la segunda ronda.
+    \item La reacción de la federación ante el ataque es completamente ineficaz, incluso al detectarlo completamente. De hecho, la detección y exclusión de este causan que el modelo del
+    atacante obtenga mejores resultados que los demás, cosa que no ocurriría si el ataque no fuera detectado.
 \end{itemize}
 
 %En conjunto, \textit{Trimmed Mean} resulta más adecuado en este escenario concreto, al ofrecer un mejor equilibrio entre robustez y estabilidad en presencia de nodos maliciosos y datos non-IID.
