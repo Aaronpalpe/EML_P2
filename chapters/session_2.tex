@@ -92,7 +92,10 @@ Comparando ambos ataques y configuraciones con los datos obtenidos, se extraen l
 \begin{itemize}
     \item El ataque de \textit{model poisoning} resulta más perjudicial que el de \textit{label flipping}. Con un 20\% de nodos maliciosos, el sistema todavía logra converger parcialmente (F1-score $0.4$), pero con un 50\% el modelo colapsa completamente (F1-score cercano a 0). En contraste, \textit{label flipping} degrada el rendimiento de forma consistente pero mantiene una convergencia estable, con valores en torno a 0.17 y 0.16 para 20\% y 50\%, respectivamente.
     
-    \item A medida que aumenta el porcentaje de clientes maliciosos, el impacto cae más en \textit{model poisoning} que en \textit{label flipping}. Mientras que en el primer caso se produce una caída drástica del rendimiento (de $0.4$ a $0$), en el segundo la degradación es leve (de 0.17 a 0.16), lo que indica que el ruido gaussiano en los modelos afecta más gravemente al proceso de agregación que la introducción de etiquetas incorrectas.
+    \item A medida que aumenta el porcentaje de clientes maliciosos, el impacto es más visible en \textit{model poisoning} 
+    que en \textit{label flipping}. Mientras que en el primer caso se produce una caída drástica del rendimiento 
+    (de $0.4$ a $0$), en el segundo la degradación es leve (de 0.17 a 0.16), lo que indica que el ruido gaussiano 
+    en los modelos afecta más gravemente al proceso de agregación que la introducción de etiquetas incorrectas.
     
     \item En la sesión anterior, el entorno DFL ideal (IID) alcanzaba un F1-score de 0.67, mientras que la introducción de heterogeneidad (DFL non-IID base) lo reducía a 0.50. Por tanto, la presencia de ataques evidencia que los entornos non-IID son especialmente vulnerables a ataques bizantinos, ya que la agregación tiene mayores dificultades para distinguir entre datos heterogéneos de perturbaciones maliciosas.
 \end{itemize}
