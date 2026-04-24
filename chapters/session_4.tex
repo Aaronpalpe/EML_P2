@@ -1,44 +1,30 @@
 \section{Sesión 4}
-% SESSION IV: REPUTATION IN ML
 
-% Use the configuration defined in Session I, using Non-IID data, to deploy a flooding attack (25% of 
-% malicious nodes and default attack parameters).  
-% • Setup the previous configuration with the following two reputation configurations using ALL metrics: 
-% ◼  Reputation with Static Weights: 0.30 / 0.15 / 0.30 / 0.25, respectively. 
-% ◼ Use 0.5 for the Reputation Initialization parameter 
-% ◼  Enable dynamic weighting, which adjusts the importance of model and communication metrics 
-% based on observed behavior. 
-% • Track node reputation scores per round, record F1-score, and confusion matrix. 
-% • Based on your experiments, 
-% ◼  Which configuration (static or dynamic) offered the best balance between robustness and 
-% learning accuracy? 
-% ◼  Did the reputation system detect and isolate malicious nodes early during training or from a 
-% specific round?
-En esta sesión estamos interesados en la evaluación de distintos mecanismos de reputación. Con este propósito,
-se ha utilizado una la configuración de entrenamiento DFL non-IID con la presencia de un nodo malicioso 
-realizando un \textit{flooding attack}. Sobre este escenario, se han usado dos configuraciones de reputación diferentes:
+% En esta sesión estamos interesados en la evaluación de distintos mecanismos de reputación. Con este propósito,
+% se ha utilizado una la configuración de entrenamiento DFL non-IID con la presencia de un nodo malicioso 
+% realizando un \textit{flooding attack}. Sobre este escenario, se han usado dos configuraciones de reputación diferentes:
 
-\begin{itemize}
-    \item Reputación mediante \textit{pesos estáticos}.
-    \item Reputación mediante \textit{pesos dinámicos}.
-\end{itemize}
+% \begin{itemize}
+%     \item Reputación mediante \textit{pesos estáticos}.
+%     \item Reputación mediante \textit{pesos dinámicos}.
+% \end{itemize}
 
-En ambos casos, la reputación inicial de cada nodo se ha establecido en 0.5. Los pesos hacen referencia a la importancia
-relativa de cada métrica usada. En nuestro caso, usaremos siempre las 4 métricas disponibles, que se dividen en dos categorías:
-\textbf{métricas basadas en el modelo}, que incluyen \textit{Similitud del modelo} y \textit{Fracción de parámetros cambiados}, y %y métricas basadas en la comunicación, que incluyen \textit{Número de mensajes} y \textit{Latencia de llegada del modelo}.
-\textbf{métricas basadas en la comunicación}, que incluyen \textit{Número de mensajes} y \textit{Latencia de llegada del modelo}.
-\vspace{1mm}
+% En ambos casos, la reputación inicial de cada nodo se ha establecido en 0.5. Los pesos hacen referencia a la importancia
+% relativa de cada métrica usada. En nuestro caso, usaremos siempre las 4 métricas disponibles, que se dividen en dos categorías:
+% \textbf{métricas basadas en el modelo}, que incluyen \textit{Similitud del modelo} y \textit{Fracción de parámetros cambiados}, y
+% \textbf{métricas basadas en la comunicación}, que incluyen \textit{Número de mensajes} y \textit{Latencia de llegada del modelo}.
+% \vspace{1mm}
 
-En el caso del ataque de \textit{flooding}, el nodo malicioso trata de saturar la red. El sistema de reputación
-debe ser capaz de identificar este comportamiento anómalo y reducir la influencia del nodo atacante en el proceso
-de aprendizaje.
+% En el caso del ataque de \textit{flooding}, el nodo malicioso trata de saturar la red. El sistema de reputación
+% debe ser capaz de identificar este comportamiento anómalo y reducir la influencia del nodo atacante en el proceso
+% de aprendizaje.
 
 \subsection{Pesos estáticos}
 
-En esta configuración, se asignan pesos fijos a cada métrica para calcular la reputación de los nodos. Este método
-es muy sencillo pero poco flexible. Los pesos asignados son 0.30 / 0.15 / 0.30 / 0.25.
+% En esta configuración, se asignan pesos fijos a cada métrica para calcular la reputación de los nodos. Este método
+% es muy sencillo pero poco flexible. Los pesos asignados son 0.30 / 0.15 / 0.30 / 0.25.
 
-\vspace{1mm}
+% \vspace{1mm}
 
 Las reputaciones calculadas por cada nodo se muestran en la Figura \ref{fig:reputation_static}:
 
@@ -46,13 +32,20 @@ Las reputaciones calculadas por cada nodo se muestran en la Figura \ref{fig:repu
 \noindent
 \begin{minipage}{\textwidth}
     \centering
-    \includegraphics[width=0.9\textwidth]{images/reputation_static.png}
+    \includegraphics[width=0.9\textwidth]{images/reputation_static_rep.png}
     \captionof{figure}{Reputación con pesos estáticos a lo largo del entrenamiento.}
     \label{fig:reputation_static}
 \end{minipage}
 \vspace{1mm}
 
-Vemos que los tres nodos honestos otorgan una reputación inferior al nodo malicioso, aunque no llegan a aislarlo completamente.
+Vemos que los tres nodos honestos otorgan una reputación inferior al nodo malicioso.
+Desde el punto de vista de cada nodo honesto, los demás nodos honestos tienen una
+reputación muy cercana a 1, mientras que la reputación del nodo malicioso es algo
+inferior a 0.7. Esta diferencia coincide con la poderación de la métrica de número
+de mensajes (0.3), en la que el nodo malicioso obtiene una puntuación terrible (envía
+alrededor de 15 mensajes por ronda). Dado que el nodo malicioso obtiene una buena puntuación
+en las otras métricas, la reputación total no es tan baja como cabría esperar.
+
 En cuanto a los resultados del entrenamiento con esta configuración, se muestran en la Figura \ref{fig:reputation_static_results}:
 \vspace{1mm}
 
@@ -65,12 +58,12 @@ En cuanto a los resultados del entrenamiento con esta configuración, se muestra
     \hfill
     % Segunda imagen: cm
     \begin{minipage}{0.25\textwidth}
-        \includegraphics[width=\textwidth]{images/reputation_static1_cm.png}
+        \includegraphics[width=\textwidth]{images/reputation_static_cm_honest.png}
     \end{minipage}
     \hfill
     % Tercera imagen: cm2
     \begin{minipage}{0.25\textwidth}
-        \includegraphics[width=\textwidth]{images/reputation_staticattacker_cm.png}
+        \includegraphics[width=\textwidth]{images/reputation_static_cm_malicious.png}
     \end{minipage}
     
     \caption{Resultados del entrenamiento con pesos estáticos: F1-score y matrices de confusión. Matriz de confusión del nodo malicioso a la derecha.}
@@ -151,3 +144,8 @@ A partir de los resultados obtenidos, se pueden extraer las siguientes conclusio
 \end{itemize}
 
 %En conjunto, \textit{Trimmed Mean} resulta más adecuado en este escenario concreto, al ofrecer un mejor equilibrio entre robustez y estabilidad en presencia de nodos maliciosos y datos non-IID.
+
+% ◼  Which configuration (static or dynamic) offered the best balance between robustness and 
+% learning accuracy? 
+% ◼  Did the reputation system detect and isolate malicious nodes early during training or from a 
+% specific round?
