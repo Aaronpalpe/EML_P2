@@ -1,12 +1,12 @@
 \section{Sesión 3}
 % SESSION III: DEFENSE AGAINST ADVERSARIAL ATTACKS IN FL
 
-Para esta sesión, se ha utilizado de nuevo la configuración de entrenamiento DFL non-IID con la presencia de un nodo malicioso realizando \textit{model poisoning}, tal y como se definió en la sesión anterior. Sobre este escenario, se han evaluado dos mecanismos de agregación robusta con el objetivo de mitigar el impacto de actualizaciones adversarias:
+% Para esta sesión, se ha utilizado de nuevo la configuración de entrenamiento DFL non-IID con la presencia de un nodo malicioso realizando \textit{model poisoning}, tal y como se definió en la sesión anterior. Sobre este escenario, se han evaluado dos mecanismos de agregación robusta con el objetivo de mitigar el impacto de actualizaciones adversarias:
 
-\begin{itemize}
-    \item Agregación mediante \textit{Trimmed Mean}.
-    \item Agregación mediante \textit{Krum}.
-\end{itemize}
+% \begin{itemize}
+%     \item Agregación mediante \textit{Trimmed Mean}.
+%     \item Agregación mediante \textit{Krum}.
+% \end{itemize}
 
 \subsection{Trimmed Mean}  
 
@@ -19,7 +19,7 @@ los resultados muestran una mejora significativa, como se muestra en la Figura \
 \noindent
 \begin{minipage}{\textwidth}
     \centering
-    \includegraphics[width=0.5\textwidth]{images/trimmed_mean_f1.png}
+    \includegraphics[width=0.4\textwidth]{images/trimmed_mean_f1.png}
     \captionof{figure}{Resultados del entrenamiento con agregación \textit{Trimmed Mean}.}
     \label{fig:trimmed_mean}
 \end{minipage}
@@ -52,7 +52,7 @@ Los resultados se presentan en la Figura \ref{fig:krum}:
 \noindent 
 \begin{minipage}{\textwidth}
     \centering
-    \includegraphics[width=0.5\textwidth]{images/krum_bueno.png}
+    \includegraphics[width=0.4\textwidth]{images/krum_bueno.png}
     \captionof{figure}{Resultados del entrenamiento con agregación \textit{Krum}.}
     \label{fig:krum}
 \end{minipage}
@@ -77,8 +77,8 @@ Vemos la matriz de confusión tanto del nodo malicioso como de uno de los nodos 
     \centering
     \begin{tabular}{cc}
         \textbf{Nodo malicioso} & \textbf{Nodo benigno} \\
-        \includegraphics[width=0.25\textwidth]{images/krum_cm_malicious.png} &
-        \includegraphics[width=0.25\textwidth]{images/krum_cm_honest.png} \\
+        \includegraphics[width=0.23\textwidth]{images/krum_cm_malicious.png} &
+        \includegraphics[width=0.23\textwidth]{images/krum_cm_honest.png} \\
     \end{tabular}
     \captionof{figure}{Matrices de confusión del nodo malicioso y uno de los nodos benignos en la última ronda con agregación Krum.}
     \label{fig:krum_confusion}
