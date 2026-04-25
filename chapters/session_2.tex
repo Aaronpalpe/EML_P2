@@ -30,8 +30,8 @@ Se observa que el impacto del ataque aumenta significativamente con el número d
 
 \begin{itemize}
     \item Con un 20\% de nodos maliciosos, los tres nodos honestos logran converger, aunque alcanzan un F1-score de 0.4, lo que representa una caída del 10\% respecto al escenario sin ataques. Por su parte, el nodo malicioso, tras recibir el modelo, introduce ruido antes de evaluarlo, obteniendo un F1-score cercano a 0 (lo que indica que su modelo ha sido corrompido). Dado que los nodos honestos agregan actualizaciones tanto de otros nodos honestos como del malicioso, el impacto del ruido introducido por este último se ve atenuado, aunque sigue provocando una degradación en el rendimiento.
-    \item Con un 50\% de nodos maliciosos, el comportamiento se degrada significativamente y hay una caída muy pronunciada, 
-    pues los dos nodos benignos acaban con un F1-score cercano a 0, ya que al haber la mitad de nodos maliciosos ha sido 
+    \item Con un 50\% de nodos maliciosos, el comportamiento se degrada significativamente y hay una caída muy pronunciada.
+    Los dos nodos benignos acaban con un F1-score cercano a 0, ya que al haber la mitad de nodos maliciosos, ha sido 
     imposible para los modelos aprender nada útil y se han visto arrastrados por el ruido introducido.
 \end{itemize}
 
@@ -59,7 +59,7 @@ En este escenario, el impacto reduce el rendimiento pero mantiene un entrenamien
 
 \begin{itemize}
     \item Con un 20\% de nodos maliciosos, el modelo presenta una convergencia similar para todos los clientes, pero el rendimiento se desploma, alcanzando un F1-score final en torno a 0.17.
-    \item Con un 50\% de nodos maliciosos, el modelo logra converger estancándose de manera uniforme en un F1-score de 0.16.
+    \item Con un 50\% de nodos maliciosos,el modelo logra converger de forma similar, estancándose de manera uniforme en un F1-score de 0.16.
 \end{itemize}
 
 %Las matrices de confusión muestran patrones de error más estructurados, con confusión sistemática entre clases, lo que indica que el modelo aprende relaciones incorrectas debido a las etiquetas alteradas.

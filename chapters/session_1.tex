@@ -57,7 +57,7 @@ En este caso, se ha realizado el mismo experimento pero con un entrenamiento des
     \item Ronda 10: IID alcanza un F1-score de aproximadamente 0.67, mientras que non-IID solo alcanza un F1-score de 0.5.
 \end{itemize}
 
-En general, aunque CFL y DFL muestran resultados similares en términos de rendimiento (F1-score), presentan diferencias importantes a nivel de arquitectura. CFL destaca por su simplicidad y menor sobrecarga de red y recursos, pero introduce un punto único de fallo y posibles cuellos de botella en federaciones grandes. Por otro lado, DFL ofrece mayor resiliencia frente a fallos y ataques, a costa de una mayor complejidad en la gestión de modelos, sincronización para la agregación y comunicaciones entre nodos.
+En general, aunque CFL y DFL muestran resultados similares en términos de rendimiento (F1-score), CFL destaca por su simplicidad y menor sobrecarga de red, pero introduce un punto único de fallo y cuellos de botella. Por otro lado, DFL ofrece mayor resiliencia frente a fallos y ataques, a costa de una mayor complejidad en la gestión de modelos, sincronización para la agregación y comunicaciones entre nodos.
 \vspace{1mm}
 
 Podemos ver las matrices de confusión para ambos casos en la Figura \ref{fig:confusion_matrices}:

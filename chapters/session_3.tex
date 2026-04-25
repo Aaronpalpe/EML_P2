@@ -29,7 +29,7 @@ Se observa que este método consigue anular prácticamente en su totalidad el ef
 
 \begin{itemize}
     \item El modelo converge de manera estable, evitando las oscilaciones bruscas observadas en \textit{model poisoning} sin defensa.
-    \item El F1-score final se sitúa en torno a 0.47, lo que supone una mejora significativa frente al caso atacado sin mecanismos de defensa (0.08).
+    \item El F1-score final se sitúa en torno a 0.47, lo que supone una mejora significativa frente al caso atacado sin mecanismos de defensa (0.4).
     \item Sin embargo, el rendimiento sigue siendo ligeramente inferior al escenario sin ataques, indicando que el filtrado de valores extremos no elimina completamente el impacto adversario.
 \end{itemize}
 
@@ -42,11 +42,7 @@ Se observa que este método consigue anular prácticamente en su totalidad el ef
 
 \subsection{Krum}
 
-El algoritmo \textit{Krum} selecciona la actualización más representativa entre los nodos, basándose en la distancia entre modelos, con el objetivo de descartar aquellos que se alejan significativamente (potencialmente maliciosos).
-
-\vspace{1mm}
-
-Los resultados se presentan en la Figura \ref{fig:krum}:
+El algoritmo \textit{Krum} selecciona la actualización más representativa entre los nodos, basándose en la distancia entre modelos, con el objetivo de descartar aquellos que se alejan significativamente (potencialmente maliciosos). Los resultados se presentan en la Figura \ref{fig:krum}:
 
 \vspace{1mm}
 \noindent 
@@ -61,8 +57,7 @@ Los resultados se presentan en la Figura \ref{fig:krum}:
 En este caso, el comportamiento es diferente:
 
 \begin{itemize}
-    \item El entrenamiento mejora respecto al escenario sin defensa, pero no alcanza la estabilidad observada con \textit{Trimmed Mean}.
-    \item En un primer momento, parece que a los nodos benignos les cuesta distinguir al nodo malicioso, lo que provoca un comportamiento
+    \item El entrenamiento empeora respecto al escenario sin defensa y tampoco alcanza la estabilidad observada con \textit{Trimmed Mean}. Parece que a los nodos benignos les cuesta distinguir al nodo malicioso, lo que provoca un comportamiento
     aleatorio hasta la ronda 6, donde ya empieza a converger. 
     \item El F1-score final se sitúa aproximadamente en 0.29, lejos de los valores obtenidos con \textit{Trimmed Mean}.
     \item Esto sugiere que, aunque Krum es capaz de descartar actualizaciones maliciosas, puede verse afectado por la heterogeneidad non-IID, seleccionando modelos que no representan adecuadamente la distribución global.
@@ -98,13 +93,11 @@ como la 3, 4 y 5 que no tienen ningún verdadero positivo, porque se confunden t
 A partir de los resultados obtenidos, se pueden extraer las siguientes conclusiones:
 
 \begin{itemize}
-    \item \textit{Trimmed Mean} demuestra una mayor robustez frente a ataques de \textit{model poisoning}, ya que consigue estabilizar la convergencia y alcanzar un F1-score superior en promedio.
-    % \textbf{Mayor resiliencia:} 
-    \item En escenarios con datos heterogéneos, \textit{Krum} puede verse penalizado, ya que la variabilidad entre nodos puede confundirse con comportamiento malicioso, afectando negativamente a la selección de modelos.
+    \item \textit{Trimmed Mean} demuestra una mayor robustez frente a ataques de \textit{model poisoning}, ya que consigue estabilizar la convergencia y alcanzar un F1-score superior en promedio al descartar las actualizaciones extremas potencialmente maliciosas. Sin embargo, \textit{Krum} puede verse penalizado en escenarios con datos non-IID, ya que la variabilidad entre nodos puede confundirse con comportamiento malicioso, afectando negativamente a la selección de modelos.
     % \textbf{Impacto de non-IID:} 
     %\item Ninguno de los métodos elimina completamente el efecto del atacante. En \textit{Krum}, se observa un mayor sesgo hacia ciertas clases, lo que sugiere un posible sobreajuste local dependiendo del nodo seleccionado. En \textit{Trimmed Mean}, los errores son más uniformes, indicando un comportamiento más equilibrado.
     % \textbf{Rendimiento por clases:} 
-    \item  Ambos métodos mejoran claramente el rendimiento respecto al escenario atacado sin defensa (F1-score $0.08$), pero no alcanzan los niveles del escenario sin ataques. Esto confirma que, aunque las técnicas robustas ayudan, no eliminan completamente el efecto adversarial.
+    \item  Ninguno de los métodos alcanza los niveles del escenario sin ataques, lo que confirma que, aunque las técnicas robustas ayudan, no eliminan completamente el efecto adversarial.
     % \textbf{Comparación global:}
 \end{itemize}
 
