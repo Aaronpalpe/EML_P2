@@ -98,6 +98,9 @@ Comparando ambos ataques y configuraciones con los datos obtenidos, se extraen l
     en los modelos afecta más gravemente al proceso de agregación que la introducción de etiquetas incorrectas.
     
     \item En la sesión anterior, el entorno DFL ideal (IID) alcanzaba un F1-score de 0.67, mientras que la introducción de heterogeneidad (DFL non-IID base) lo reducía a 0.50. Por tanto, la presencia de ataques evidencia que los entornos non-IID son especialmente vulnerables a ataques bizantinos, ya que la agregación tiene mayores dificultades para distinguir entre datos heterogéneos de perturbaciones maliciosas.
+    \item La exposición prolongada a ataques de \textit{model poisoning} tiene efectos variables según 
+    el porcentaje de nodos maliciosos. En el caso de 20\%, apenas afecta a la velocidad de converrgencia; 
+    mientras que en el caso del 50\% de nodos maliciosos, tras varias rondas de ataque, el F1-score cae drásticamente.
 \end{itemize}
 
     %Al añadir ataques sobre este escenario non-IID, la degradación se intensifica: con un 20\% de \textit{label flipping}, el rendimiento cae hasta 0.17, y en el peor caso de \textit{model poisoning} (50\%), el modelo se degrada completamente hasta valores cercanos a 0. 
@@ -109,3 +112,6 @@ Comparando ambos ataques y configuraciones con los datos obtenidos, se extraen l
 % \end{itemize}
 
 % En resumen, los ataques afectan tanto a la calidad final del modelo como a la dinámica de entrenamiento, siendo el entorno non-IID especialmente vulnerable debido a la ya existente heterogeneidad de los datos.
+
+%◼ How does prolonged exposure to attacks affect model convergence speed over multiple
+%rounds? Are there signs of cumulative attack effects over time?
